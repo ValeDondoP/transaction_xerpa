@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'transaction_xerpa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',      # Nombre de tu base de datos
-        'USER': 'postgres',          # Nombre de usuario de PostgreSQL
-        'PASSWORD': 'postgres',  # Contraseña de usuario de PostgreSQL
-        'HOST': 'db',       # Si PostgreSQL está en el mismo host
-        'PORT': '5432',            # Puerto por defecto de PostgreSQL
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
