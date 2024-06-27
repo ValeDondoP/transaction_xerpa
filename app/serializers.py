@@ -2,11 +2,15 @@ from rest_framework import serializers
 from .models import Transaction, Category, Commerce
 
 
-class TransactionSerializerInput(serializers.Serializer):
+class TransactionInputSerializer(serializers.Serializer):
     id = serializers.UUIDField()
     description = serializers.CharField()
     amount = serializers.DecimalField(max_digits=10, decimal_places=2)
     date = serializers.DateField()
+
+
+class TransactionListSerializer(serializers.Serializer):
+    transactions = TransactionInputSerializer(many=True)
 
 
 class CategorySerializer(serializers.ModelSerializer):

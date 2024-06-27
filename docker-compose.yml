@@ -20,5 +20,15 @@ services:
     depends_on:
       - db
 
+  tests:
+    build: .
+    command: pytest
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+    environment:
+      DJANGO_SETTINGS_MODULE: transaction_xerpa.settings
+
 volumes:
   postgres_data:

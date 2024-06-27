@@ -1,6 +1,11 @@
 # Usa una imagen base oficial de Python.
 FROM python:3.9-slim
 
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DJANGO_SETTINGS_MODULE=transaction_xerpa.settings
+
 # Establece el directorio de trabajo dentro del contenedor.
 WORKDIR /code
 
