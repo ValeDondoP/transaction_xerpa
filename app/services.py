@@ -64,4 +64,5 @@ def create_enriched_transactions(transactions):
         return created_transactions
     except Exception as e:
         print(f"Error creating enriched transactions: {e}")
+
         return []

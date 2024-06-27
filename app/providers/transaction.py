@@ -1,6 +1,6 @@
 from app.models import Transaction
 
-def bulk_create_transactions(self, transactions):
+def bulk_create_transactions(transactions):
     created_transactions = []
     for transaction_data in transactions:
         try:

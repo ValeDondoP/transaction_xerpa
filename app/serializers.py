@@ -1,6 +1,8 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 from .models import Transaction, Category, Commerce
-
+import uuid
+from datetime import datetime
 
 class TransactionInputSerializer(serializers.Serializer):
     id = serializers.UUIDField()
@@ -8,9 +10,29 @@ class TransactionInputSerializer(serializers.Serializer):
     amount = serializers.DecimalField(max_digits=10, decimal_places=2)
     date = serializers.DateField()
 
+    def to_internal_value(self, data):
+        if 'id' in data:
+            try:
+                data['id'] = uuid.UUID(data['id'])
+            except ValueError:
+                raise ValidationError({'id': 'Invalid UUID format.'})
+        else:
+            data['id'] = None
+
+        try:
+            data['amount'] = float(data['amount'])
+        except ValueError:
+            raise ValidationError({'amount': 'Invalid amount format.'})
+
+        try:
+            data['date'] = datetime.strptime(data['date'], '%Y-%m-%d').date()
+        except ValueError:
+            raise ValidationError({'date': 'Invalid date format.'})
+
+        return super().to_internal_value(data)
 
 class TransactionListSerializer(serializers.Serializer):
-    transactions = TransactionInputSerializer(many=True)
+    transactions = serializers.ListSerializer(child=TransactionInputSerializer())
 
 
 class CategorySerializer(serializers.ModelSerializer):
