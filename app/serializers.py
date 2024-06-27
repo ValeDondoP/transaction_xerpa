@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import Transaction, Category, Commerce
+from .models import Transaction, Category, Commerce, Keyword
 import uuid
 from datetime import datetime
 
@@ -54,3 +54,9 @@ class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ['id', 'description', 'amount', 'date', 'category', 'merchant', 'created_at', 'updated_at']
+
+
+class KeywordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Keyword
+        fields = ['id', 'keyword']

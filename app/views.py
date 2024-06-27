@@ -2,9 +2,10 @@ import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import TransactionSerializer, TransactionListSerializer
+from .serializers import TransactionSerializer, TransactionListSerializer, KeywordSerializer, CategorySerializer, CommerceSerializer
 from app import services as transaction_services
-
+from rest_framework import generics, pagination
+from .models import Keyword, Category, Commerce
 class EnrichmentAPIView(APIView):
     """
     Endpoint to enrich a transaction
@@ -24,3 +25,24 @@ class EnrichmentAPIView(APIView):
             }, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class KeywordListAPIView(generics.ListAPIView):
+    """
+    Endpoint to get every Keyword in db
+    """
+    queryset = Keyword.objects.all()
+    serializer_class = KeywordSerializer
+    pagination_class = pagination.PageNumberPagination
+
+
+class CategoryListAPIView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    pagination_class = pagination.PageNumberPagination
+
+
+class CommerceListAPIView(generics.ListAPIView):
+    queryset = Commerce.objects.all()
+    serializer_class = CommerceSerializer
+    pagination_class = pagination.PageNumberPagination
