@@ -1,5 +1,10 @@
 ## xerpa-test
+Hello there!
 
+Short Info:
+In my system, I've implemented a layered architecture pattern where there's a 'provider' module responsible for querying the database, and services that utilize these providers. These services are then used within the views.
+
+Next, here's how to run the project locally:
 ### Running the development environment
 
 * `docker-compose build `
